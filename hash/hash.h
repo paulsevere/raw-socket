@@ -1,3 +1,4 @@
+#ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE 500
 
 union item {
@@ -30,3 +31,4 @@ entry_t *ht_newpair(char *key, char *value);
 void ht_set(hashtable_t *hashtable, char *key, char *value);
 
 char *ht_get(hashtable_t *hashtable, char *key);
+#endif

@@ -73,8 +73,6 @@ int main(void) {
 
       i = read(users[uidx].uc_fd, buf, sizeof(buf));
 
-      handleCommand(buf);
-
       if (i == -1) continue;
 
       if (i == 0) { /* EOF from a client */
@@ -96,10 +94,9 @@ int main(void) {
         continue;
       }
 
-      log_blue("got a message from ");
-      printf("%d\n", users[uidx].uc_fd);
-
       /* now write it to the other users */
+      int tok_count = handleCommand(buf, hashtable);
+
       broadcast(buf, users[uidx].uc_fd);
       // for (uidx = 0; uidx < NUSERS; uidx++) {
       //   if (users[uidx].uc_fd == 0 || users[uidx].uc_fd == ke.ident)
